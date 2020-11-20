@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=KEY&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script src="./index.js"></script>
+  </head>
+  <body>
+         <h1>Select a location!</h1>
+         <p>Click on a location on the map to select it. Drag the marker to change location.</p>
+         
+         <!--map div-->
+         <div id="map"></div>
+         
+         <!--our form-->
+         <h2>Chosen Location</h2>
+         <form method="post">
+             <input type="text" id="lat" readonly="yes"><br>
+             <input type="text" id="lng" readonly="yes">
+         </form>
+         
+     </body>
+</html>
