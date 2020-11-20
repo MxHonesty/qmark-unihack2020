@@ -12,6 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
   const methodOverride = require('method-override')
   const bodyParser = require('body-parser');
 
+  app.use(express.static(path.join(__dirname, 'public')));
 
   app.use(bodyParser.urlencoded({extended : true}));
   app.use(bodyParser.json());
@@ -61,22 +62,37 @@ if (process.env.NODE_ENV !== 'production') {
     }
   
 
-  app.get('/', checkAuthenticated, (req, res) => {
+  app.get('/', (req, res) => {
     //console.log(users.find(user => user.email === email))
-    res.render('index.ejs', { name: req.user.NUME, pass:req.user.FUNCTIE })
+    res.render('index.ejs')
   })
-  app.get('/newpost', checkAuthenticated, IsMaster, (req, res) => {
+  app.get('/search',(req, res) => {
+    //console.log(users.find(user => user.email === email))
+    console.log(req.query)
+    const lat = req.query.lat
+    const lng = req.query.long
+    connection.query('SELECT * FROM jobs WHERE SERVICIU =? ORDER BY SQRT(ABS(LAT-'+lat+')*ABS(LAT-'+lat+') + ABS(LNG-'+lng+')*ABS(LNG-'+lng+')) ASC',req.query.serv, function(error, response, fields) {
+      if(error) throw error;
+      else{
+        console.log(response)
+        res.send(response)
+      }
+  });
+  })
+  app.get('/newpost', checkAuthenticated, (req, res) => {
     //console.log(users.find(user => user.email === email))
     res.render('newpost.ejs', { nume: req.user.NUME})
   })
-  app.post('/new_post', checkAuthenticated, IsMaster, (req, res) => {
+  app.post('/new_post', checkAuthenticated, (req, res) => {
     //console.log(users.find(user => user.email === email))
 
     const post = {
       SERVICIU:req.body.serviciu,
       AUTOR:req.user.INDX,
       PRET:req.body.pret,
-      DESCRIERE:req.body.descriere
+      DESCRIERE:req.body.descriere,
+      LAT:req.body.latitudine,
+      LNG:req.body.longitudine
       };
 
       connection.query('INSERT INTO jobs SET ?', post, (err, response) => {
@@ -140,22 +156,6 @@ if (process.env.NODE_ENV !== 'production') {
   
     res.redirect('/login')
   }
-
-  function IsMaster(req, res, next) {
-    if (req.user.FUNCTIE == 'M') {
-      return next()
-    }
-  
-    res.send('Nu esti mester!')
-  }
-  function IsMaster(req, res, next) {
-    if (req.user.FUNCTIE == 'M') {
-      return next()
-    }
-  
-    res.send('Nu esti client!')
-  }
-  
   function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return res.redirect('/')
