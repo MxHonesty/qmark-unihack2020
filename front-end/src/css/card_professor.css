@@ -1,0 +1,31 @@
+
+.card {
+  border-width: thick;
+  width: auto;
+  height: auto;
+}
+
+.card-head {
+  border: 10px;
+  border-left-width: thick;
+  border-bottom-width: thick;
+  border-top-width: thick;
+  background-color: #F7F7F7;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.card-body {
+  border: 10px;
+  background-color: #F7F7F7;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+h3 {
+  text-align: left;
+}
+
+.allign {
+  text-align: right;
+}

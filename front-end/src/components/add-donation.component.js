@@ -111,7 +111,7 @@ export default class AddDonation extends Component {
                 {this.state.submitted ? (
                     <h2> Donatia a fost trimisa cu succes. </h2>
                 ) : (
-                    <div className="container">
+                    <div className="container" style={{maxWidth: "330px"}}>
                       <div className="card">
                         <article className="card-body mx-auto" style={{maxWidth: "400"}}>
                         
@@ -146,13 +146,11 @@ export default class AddDonation extends Component {
                                 <input type="input" onChange = {this.onChangeDescriere} className="form-control" placeholder="Mesaj" id="other"/>
                               </div>
                 
-                              <div className="form-group">
-                                <button type="submit"  className="btn btn-primary btn-block"> Submit </button>
-                              </div>
+
                               
                               <script
                                 src="https://checkout.stripe.com/v2/checkout.js"
-                                class="stripe-button"
+                                className="stripe-button"
                                 data-key="pk_test_51HpuO9HVcUXloEFQsaklizjrJNIIk1l1W3DetO5thRHaIlerOKRGZJYbVwrOmvd7x0LxuagTq8STsfMtG2YA9goG00ZHmO35aC" 
                                 data-amount={this.state.suma}
                                 data-currency="usd" 
