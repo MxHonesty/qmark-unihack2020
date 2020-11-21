@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropupDataService from "../services/propup.service";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default class AddDonation extends Component {
     constructor(props) {
@@ -9,6 +11,8 @@ export default class AddDonation extends Component {
         this.onChangeSuma = this.onChangeSuma.bind(this);
         this.saveDonatie = this.saveDonatie.bind(this);
         this.newDonatie = this.newDonatie.bind(this);
+        const stripePromise = loadStripe("KEY")
+        
         
         this.state = {
             nume: "",
@@ -58,15 +62,15 @@ export default class AddDonation extends Component {
         })
         console.log(data);
         
-        //PropupDataService.create(data)
-        //.then(response =>{
-        //    this.setState({
-        //        submitted: true
-        //    });
-        //})
-        //.catch(e => {
-        //    console.log(e);
-        //});
+        PropupDataService.create(data)
+        .then(response =>{
+            this.setState({
+                submitted: true
+            });
+        })
+        .catch(e => {
+            console.log(e);
+        });
     }
     
     newDonatie(){
@@ -125,6 +129,17 @@ export default class AddDonation extends Component {
                               <div className="form-group">
                                 <button type="submit"  className="btn btn-primary btn-block"> Submit </button>
                               </div>
+                              
+                              <script
+                                 src="//checkout.stripe.com/v2/checkout.js"
+                                 className="stripe-button"
+                                 data-key="<%= key %>" 
+                                 data-amount="7000" 
+                                 data-currency="usd" 
+                                 data-name="Gautam Sharma" 
+                                 data-description="Buy React.js Complete Course" 
+                                 data-locale="auto" > 
+                                </script> 
                               
                             </form>
                             
