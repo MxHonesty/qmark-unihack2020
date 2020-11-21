@@ -10,13 +10,14 @@
   border-left-width: thick;
   border-bottom-width: thick;
   border-top-width: thick;
-  background-color: #246553;
+  background-color: #F7F7F7;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 }
 
 .card-body {
   border: 10px;
+  background-color: #F7F7F7;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
 }
