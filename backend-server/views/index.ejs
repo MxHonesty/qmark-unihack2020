@@ -1,2 +1,66 @@
-<h1>HI <%= name %></h1>
-<h1><%=pass%></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixit</title>
+</head>
+<body>
+
+    <div>
+        <input type="text" id="search" placeholder="Search..." name="search">
+        <button>Search</button>
+        <pre id="pre">
+
+        </pre>
+    </div>
+</body>
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    getLocation()
+ });
+
+        
+ function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+ // x.innerHTML = "Latitude: " + position.coords.latitude + 
+ // "<br>Longitude: " + position.coords.longitude;
+ console.log(position)
+  $.get('/search?serv='+$("#search").val()+'&lat='+position.coords.latitude+'&long='+position.coords.longitude, function(data, status){
+        console.log(data)
+      $("#pre").append(JSON.stringify(data));
+    });
+}
+
+
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+      break;
+  }
+}
+});
+</script>
+</html>
+

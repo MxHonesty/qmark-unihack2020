@@ -1,0 +1,22 @@
+<h1>Salut <%= nume%>!</h1>
+<h1>Completeaza datele pentru a crea un anunt</h1>
+<form action="/new_post" method="POST">
+    <div>
+        <label for="name">Serviciu</label>
+        <input type="text" id="name" name="serviciu" required>
+    </div>
+    <div>
+        <label for="name">Locatie</label>
+        <input type="text" id="name" name="locatie" required>
+    </div>
+    <div>
+        <label for="name">Pret</label>
+        <input type="text" id="name" name="pret" required>
+    </div>
+    <div>
+        <label for="name">Descriere</label>
+        <input type="text" id="name" name="descriere" required>
+    </div>
+    <button type="submit">Creaza!</button>
+
+</form>
