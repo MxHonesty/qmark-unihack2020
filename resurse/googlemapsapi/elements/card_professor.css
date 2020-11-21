@@ -24,5 +24,8 @@
 
 h3 {
   text-align: left;
-  vertical-align: bottom;
+}
+
+.allign {
+  text-align: right;
 }
