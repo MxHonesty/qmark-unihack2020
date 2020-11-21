@@ -10,7 +10,7 @@ class PropupDataService {
     }
     
     create(data){
-        return http.post("/donatii", data);
+        return http.post("/payment", data);
     }
     
     deleteAll(){

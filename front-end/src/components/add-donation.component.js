@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import PropupDataService from "../services/propup.service";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 
 export default class AddDonation extends Component {
     constructor(props) {
@@ -11,8 +9,8 @@ export default class AddDonation extends Component {
         this.onChangeSuma = this.onChangeSuma.bind(this);
         this.saveDonatie = this.saveDonatie.bind(this);
         this.newDonatie = this.newDonatie.bind(this);
-        const stripePromise = loadStripe("KEY")
-        
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.scriptLoaded = this.scriptLoaded.bind(this);
         
         this.state = {
             nume: "",
@@ -23,6 +21,28 @@ export default class AddDonation extends Component {
             
         }
     }
+
+    componentWillMount() {
+      const script = document.createElement("script");
+      script.src = "https://checkout.stripe.com/v2/checkout.js";
+      script.async = true;
+        script.setAttribute("className", "stripe-button");
+        script.setAttribute("data-key", "pk_test_51HpuO9HVcUXloEFQsaklizjrJNIIk1l1W3DetO5thRHaIlerOKRGZJYbVwrOmvd7x0LxuagTq8STsfMtG2YA9goG00ZHmO35aC");
+        script.setAttribute("data-amount", "7000");
+        script.setAttribute("data-currency", "usd");
+        script.setAttribute("data-name", "Gautam Sharma");
+        script.setAttribute("data-description", "Buy React.js Complete Course");
+        script.setAttribute("data-locale", "auto");
+      script.onload = () => this.scriptLoaded();
+    
+      document.body.appendChild(script);
+    }
+    
+    
+    scriptLoaded() {}
+    
+
+    
     
     onChangeNume(e){
         // Metoda aperata la fiecare schimbare a numelui.
@@ -96,7 +116,7 @@ export default class AddDonation extends Component {
                         <article className="card-body mx-auto" style={{maxWidth: "400"}}>
                         
                         
-                            <form onSubmit={this.saveDonatie}>
+                            <form onSubmit={this.saveDonatie} action="payment" method="POST">
                               <div className="btn-group-vertical">
                     
                                   <div className="row">
@@ -131,15 +151,16 @@ export default class AddDonation extends Component {
                               </div>
                               
                               <script
-                                 src="//checkout.stripe.com/v2/checkout.js"
-                                 className="stripe-button"
-                                 data-key="<%= key %>" 
-                                 data-amount="7000" 
-                                 data-currency="usd" 
-                                 data-name="Gautam Sharma" 
-                                 data-description="Buy React.js Complete Course" 
-                                 data-locale="auto" > 
-                                </script> 
+                                src="https://checkout.stripe.com/v2/checkout.js"
+                                class="stripe-button"
+                                data-key="pk_test_51HpuO9HVcUXloEFQsaklizjrJNIIk1l1W3DetO5thRHaIlerOKRGZJYbVwrOmvd7x0LxuagTq8STsfMtG2YA9goG00ZHmO35aC" 
+                                data-amount={this.state.suma}
+                                data-currency="usd" 
+                                data-name={this.state.nume} 
+                                data-description={this.state.descriere} 
+                                data-locale="auto" > 
+                            </script> 
+                              
                               
                             </form>
                             
