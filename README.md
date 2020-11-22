@@ -1,6 +1,7 @@
 # PropUp
 An app that aims at helping education NGOs raise funds in these especially difficult times! <br>
-Qmark team entry for Unihack 2020
+Qmark team entry for Unihack 2020.
+You can try the app [here](https://donate-frontend.herokuapp.com/).
 
 <h5> Powered by Express, React and Stripe </h5>
 
