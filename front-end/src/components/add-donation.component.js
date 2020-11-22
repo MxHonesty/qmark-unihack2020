@@ -139,11 +139,11 @@ export default class AddDonation extends Component {
                               <hr/>
                     
                               <div className="form-group input-group">
-                                <input type="input" onChange = {this.onChangeNume} className="form-control" placeholder="Nume" id="other"/>
+                                <input type="input" onChange = {this.onChangeNume} className="form-control" placeholder="Name" id="other"/>
                               </div>
                               
                               <div className="form-group input-group">
-                                <input type="input" onChange = {this.onChangeDescriere} className="form-control" placeholder="Mesaj" id="other"/>
+                                <input type="input" onChange = {this.onChangeDescriere} className="form-control" placeholder="Message" id="other"/>
                               </div>
                 
 
@@ -151,7 +151,7 @@ export default class AddDonation extends Component {
                               <script
                                 src="https://checkout.stripe.com/v2/checkout.js"
                                 className="stripe-button"
-                                data-key="pk_test_51HpuO9HVcUXloEFQsaklizjrJNIIk1l1W3DetO5thRHaIlerOKRGZJYbVwrOmvd7x0LxuagTq8STsfMtG2YA9goG00ZHmO35aC" 
+                                data-key="pk_test_51HpvbFLr0hgmkd0rVHWaBcXbCkpAWbzql1nckY4pPxpnn7L3ycd7rLDZpLqyMCekkqH0cIDXhAmY3JGAoDTgLZKj00LWSnrCf1" 
                                 data-amount={this.state.suma}
                                 data-currency="usd" 
                                 data-name={this.state.nume} 
